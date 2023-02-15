@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { Auth } from './auth';
 import { JwtModule } from '@nestjs/jwt';
@@ -14,4 +14,6 @@ import { JwtModule } from '@nestjs/jwt';
     }),
   ],
 })
-export class AuthModule {}
+export class AuthModule  {
+
+}
