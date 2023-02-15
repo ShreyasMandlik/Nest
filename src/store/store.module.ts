@@ -1,7 +1,8 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { UserStrore } from './user-strore/user-strore';
-
+@Global()
 @Module({
-  providers: [UserStrore]
+  providers: [UserStrore],
+  exports : [UserStrore]
 })
 export class StoreModule {}

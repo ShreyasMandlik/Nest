@@ -4,13 +4,14 @@ import { authDto } from './authDTO';
 
 @Controller('/auth')
 export class AuthController {
+  constructor(private readonly authService: Auth) {}
 
-    constructor(private readonly authService:Auth){
-        
-    }
-
-   @Post("/signup")
-    sigup(@Body() authdata:authDto):any {
-        return this.authService.saveuser(authdata); 
-   }
+  @Post('/signup')
+  async sigup(@Body() authdata: authDto){
+    return this.authService.saveuser(authdata);
+  }
+  @Post('/signin')
+  async sigin(@Body() authdata: authDto){
+    return this.authService.signin(authdata);
+  }
 }
