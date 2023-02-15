@@ -8,6 +8,7 @@ export class AuthController {
 
   @Post('/signup')
   async sigup(@Body() authdata: authDto){
+    // console.log("called");
     return this.authService.saveuser(authdata);
   }
   @Post('/signin')

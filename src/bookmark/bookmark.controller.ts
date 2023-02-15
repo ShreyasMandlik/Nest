@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { Bookmark } from './bookmark';
 import { randomUUID } from 'crypto';
 import { bookmarkDTO } from './bookmarkDTO';
@@ -16,7 +16,7 @@ export class BookmarkController {
   saveBookmark(@Body() bookmark: bookmarkDTO) {
     return this.appService.save(bookmark);
   }
-
+  
   @Get(':id')
   getbyId(@Param('id') id: string) {
     return this.appService.getbyId(id);
@@ -25,5 +25,10 @@ export class BookmarkController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.appService.deleteById(id);
+  }
+
+  @Put(':id')
+  update(@Param('id') id: string, @Body() bookmark: bookmarkDTO) {
+    return this.appService.update(id, bookmark);
   }
 }

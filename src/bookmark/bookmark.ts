@@ -37,7 +37,9 @@ export class Bookmark {
     return this.bookStore.getById(id);
   }
 
-  deleteById(id:string){
+  deleteById(id: string) {
     return this.bookStore.deletebyId(id);
   }
+
+  update(id: string, Bookmark: bookmarkDTO) {}
 }
