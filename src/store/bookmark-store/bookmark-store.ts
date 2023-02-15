@@ -1,21 +1,25 @@
 import { Global, Injectable } from '@nestjs/common';
 
-
 export type Bookmarkentity = {
-
-        id: string;
-        url: string;
-        description: string;
-        name: string;
-        userId: string;
-
+  id: string;
+  url: string;
+  description: string;
+  name: string;
+  userId: string;
 };
 @Global()
 @Injectable()
 export class BookmarkStore {
   bookmarks: Bookmarkentity[] = [];
 
-  get(): Bookmarkentity[] {
+  get(id: string): Bookmarkentity[] {
+    return this.bookmarks.filter((bookmarkentity: Bookmarkentity) => {
+      if (bookmarkentity.userId == id) {
+        return bookmarkentity;
+      }
+    });
+  }
+  getall(): Bookmarkentity[] {
     return this.bookmarks;
   }
 
@@ -33,7 +37,7 @@ export class BookmarkStore {
     return this.bookmarks.find((bookmark) => bookmark.id == id);
   }
 
-  deletebyId(id:string):Bookmarkentity[]{
-    return this.bookmarks.filter((bookmark)=>bookmark.id!==id)
+  deletebyId(id: string): Bookmarkentity[] {
+    return this.bookmarks.filter((bookmark) => bookmark.id !== id);
   }
 }
