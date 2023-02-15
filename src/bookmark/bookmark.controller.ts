@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Req,
+} from '@nestjs/common';
 import { Bookmark } from './bookmark';
 import { randomUUID } from 'crypto';
 import { bookmarkDTO } from './bookmarkDTO';
@@ -10,15 +19,21 @@ export class BookmarkController {
   constructor(private readonly appService: Bookmark) {}
 
   @Get('')
-  getall(res:IRequest,rep:Response,next:NextFunction) {
-    return this.appService.getall();
+  getall(@Req() request: IRequest) {
+    return this.appService.get(request.userData.id);
   }
 
   @Post('')
-  saveBookmark(@Body() bookmark: bookmarkDTO) {
+  saveBookmark(@Req() request: IRequest) {
+    const bookmark = {
+      url: request.body.url,
+      description: request.body.description,
+      name: request.body.name,
+      userId: request.userData.id,
+    };
     return this.appService.save(bookmark);
   }
-  
+
   @Get(':id')
   getbyId(@Param('id') id: string) {
     return this.appService.getbyId(id);
