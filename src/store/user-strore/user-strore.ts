@@ -1,11 +1,11 @@
-import { Injectable, Post } from '@nestjs/common';
+import { Injectable, Global } from '@nestjs/common';
 
 export type User = {
     id:string,
     email:string,
     password:string
 }
-
+@Global()
 @Injectable()
 export class UserStrore {
   users: User[]=[];
@@ -28,4 +28,7 @@ export class UserStrore {
   getById(id: string): User {
     return this.users.find((user) => user.id == id);
   }
+
+  
+
 }
